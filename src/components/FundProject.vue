@@ -89,7 +89,7 @@ export default {
 					method: 'GET',
 					headers: { 'Content-Type': 'application/json; charset=UTF-8' },
 				}
-				await fetch(this.$url+'/projectdetail', get)
+				await fetch(this.$url+'/facofferlist', get)
 					.then(response => response.json())
 					.then(data => {
 						this.projects = []

@@ -6,12 +6,12 @@ import Signup from '../views/Signup.vue'
 import FundProject from '../components/FundProject.vue'
 import FacOffer from '../components/FacOffer.vue'
 import TokenCreation from '../components/TokenCreation.vue'
-import ApproveRejectFunds from '../components/ApproveRejectFunds.vue'
+import FacAccept from '../components/FacAccept.vue'
 
 const routes = [{
         path: '/',
         name: 'Main',
-        redirect: '/insurancecreation',
+        redirect: '/facoffercreation',
         component: Main,
         meta: { requiresAuth: true, loading: true },
         children: [{
@@ -24,17 +24,17 @@ const routes = [{
                 }
             },
             {
-                path: '/insurancecreation',
+                path: '/facoffercreation',
                 name: 'FacOffer',
                 component: FacOffer
             },
             {
-                path: '/review-funds',
-                name: 'ApproveRejectFunds',
-                component: ApproveRejectFunds
+                path: '/fac-accept',
+                name: 'FacAccept',
+                component: FacAccept
             },
             {
-                path: '/tokencreate',
+                path: '/get-credits',
                 name: 'TokenCreation',
                 component: TokenCreation
             },
@@ -49,7 +49,7 @@ const routes = [{
         path: '/signup',
         name: 'Signup',
         component: Signup
-    }
+    },
 ]
 
 const router = createRouter({

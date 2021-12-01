@@ -3,21 +3,21 @@
 		<div class="navigation-bar">
 			<Brand></Brand>
 			<div class="nav-links">
-				<router-link to="/tokencreate" class="tab">
+				<router-link to="/get-credits" class="tab">
 					<i class="fas fa-coins"></i>
-					Token Creation
+					Get Credits
 				</router-link>
-				<router-link to="/insurancecreation" class="tab">
+				<router-link to="/facoffercreation" class="tab">
 					<i class="fas fa-plus-circle"></i>
 					FAC Offer
 				</router-link>
-				<router-link to="/fund-project" class="tab">
+				<!-- <router-link to="/fund-project" class="tab">
 					<i class="fas fa-project-diagram"></i>
-					Fund Project
-				</router-link>
-				<router-link to="/review-funds" class="tab">
+					FAC Accept 
+				</router-link> -->
+				<router-link to="/fac-accept" class="tab">		<!---review funds-->
 					<i class="fas fa-check-double"></i>
-					Review Funds
+					FAC Accept
 				</router-link>
 				<button class="btn tab" @click="signOut"><i class="fas fa-sign-out-alt"></i>Sign out</button>
 			</div>
@@ -87,7 +87,7 @@ export default {
 			address: '',
 			balance: null,
 			account: this.$store.state.account,
-			name: this.$store.state.firstName + ' ' + this.$store.state.lastName
+			name: this.$store.state.lastName + ' ' + this.$store.state.firstName 
 		}
 	},
 	methods: {
@@ -124,13 +124,14 @@ export default {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json; charset=UTF-8' },
 					body: JSON.stringify({
-						'account_address' : this.account
+						'account_address' : this.account,
+						Token_ID: 48497640
 					})
 				}
-				await fetch(this.$url+'/accountbalance', post)
+				await fetch(this.$url+'/tokenbalance', post)
 					.then(response => response.json())
 					.then(data => {
-						this.balance = data.balance / 1000000
+						this.balance = data['Token Balance']
 					})
 			} catch(err) {
 				console.log(err)

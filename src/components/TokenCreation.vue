@@ -69,10 +69,10 @@ export default {
 						'Decimal': this.Decimal,
 					})
 				}
-				await fetch(this.$url+'/tokencreate', post)
+				await fetch(this.$url+'/get-credits', post)
 					.then(response => response.json())
 					.then(data => {
-						this.$emit('popup', 'TOkens created successfully!', 'Your Project ID is '+data.appID)
+						this.$emit('popup', 'Tokens created successfully!', 'Your Project ID is '+data.appID)
 						this.name = ''
 						this.url = ''
 						this.funds = null
