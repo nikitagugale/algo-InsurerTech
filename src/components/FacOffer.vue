@@ -138,7 +138,7 @@ export default {
 						'TokenID' : this.TokenID, 
 					})
 				}
-				await fetch(this.$url+'/insurancecreation', post)
+				await fetch(this.$url+'/facoffercreation', post)
 					.then(response => response.json())
 					.then(data => {
 						this.$emit('popup', 'FAC Offer created successfully!', 'Your FAC Offer ID is '+data.appID)

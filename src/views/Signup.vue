@@ -51,7 +51,8 @@ export default {
 			lastName: '',
 			email: '',
 			password: '',
-			confirmPassword: '',
+			confirmPassword: ''
+			// accountAddress: ''
 		}
 	},
 	methods: {
@@ -77,8 +78,8 @@ export default {
 				}
 				await fetch(this.$url+'/signup', post)
 					.then(response => response.json())
-					.then(() => {
-						this.$emit('externalPopup', 'Account created successfully!')
+					.then((data) => {
+						this.$emit('externalPopup', 'Account created successfully!', data.account_address)
 						this.$router.push('/login')
 					})
 			} catch(err) {

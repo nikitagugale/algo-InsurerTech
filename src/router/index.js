@@ -11,7 +11,7 @@ import ApproveRejectFunds from '../components/ApproveRejectFunds.vue'
 const routes = [{
         path: '/',
         name: 'Main',
-        redirect: '/insurancecreation',
+        redirect: '/facoffercreation',
         component: Main,
         meta: { requiresAuth: true, loading: true },
         children: [{
@@ -24,7 +24,7 @@ const routes = [{
                 }
             },
             {
-                path: '/insurancecreation',
+                path: '/facoffercreation',
                 name: 'FacOffer',
                 component: FacOffer
             },
@@ -49,7 +49,7 @@ const routes = [{
         path: '/signup',
         name: 'Signup',
         component: Signup
-    }
+    },
 ]
 
 const router = createRouter({
