@@ -27,12 +27,12 @@
 				<div class = "split">
 				<div class="input-field with-label">
 					<label>ReInsurer1 Address</label>
-					<input type="text" v-model="ReInsurer1_Address" required />
+					<input type="text" v-model="Reinsurer1_Address" required />
 				</div>
 				-
 				<div class="input-field with-label">
 					<label>ReInsurer2 Address</label>
-					<input type="text" v-model="ReInsurer2_Address" required />
+					<input type="text" v-model="Reinsurer2_Address" required />
 				</div>
 				</div>
 				<div class = "split">
@@ -43,7 +43,7 @@
 				-
 				<div class="input-field with-label">
 					<label>TokenID</label>
-					<input type="number" v-model="TokenID" required />
+					<input type="number" v-model="Token_ID" required />
 				</div>
 				</div>
 				<div class = "split">
@@ -65,7 +65,7 @@
 				-
 				<div class="input-field with-label">
 					<label>Total Premium</label>
-					<input type="number" v-model="FAC_Premium" required />
+					<input type="number" v-model="Total_Premium" required />
 				</div>
 				</div>
 				<div class = "split">
@@ -97,9 +97,9 @@ export default {
 	data() {
 		return {
 			isLoading: false,
-			ReInsurer1_Address: '',
-			ReInsurer2_Address: '',
 			Insurer_Address: '',
+			Reinsurer1_Address: '',
+			Reinsurer2_Address: '',
 			PolicyNo: null,
 			ProductID: null,
 			Product_Name: '',
@@ -110,7 +110,7 @@ export default {
 			FAC_Premium: null,
 			ReInsurer1_Amount: null,
 			ReInsurer2_Amount: null,
-			TokenID: null,
+			Token_ID: null,
 		}
 	},
 	methods: {
@@ -122,9 +122,9 @@ export default {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json; charset=UTF-8' },
 					body: JSON.stringify({
-						'ReInsurer1_Address' : this.$store.state.account,
-						'ReInsurer2_Address' : this.$store.state.account,
 						'Insurer_Address' : this.$store.state.account,
+						'Reinsurer1_Address' : this.Reinsurer1_Address,
+						'Reinsurer2_Address' : this.Reinsurer2_Address,
 						'PolicyNo' : this.PolicyNo, 
 						'ProductID' : this.ProductID,
 						'Product_Name' : this.Product_Name,
@@ -135,7 +135,7 @@ export default {
 						'FAC_Premium' : this.FAC_Premium,
 						'ReInsurer1_Amount' : this.ReInsurer1_Amount,
 						'ReInsurer2_Amount' : this.ReInsurer2_Amount,
-						'TokenID' : this.TokenID, 
+						'Token_ID' : this.Token_ID, 
 					})
 				}
 				await fetch(this.$url+'/facoffercreation', post)
