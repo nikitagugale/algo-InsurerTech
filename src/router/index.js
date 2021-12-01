@@ -6,7 +6,7 @@ import Signup from '../views/Signup.vue'
 import FundProject from '../components/FundProject.vue'
 import FacOffer from '../components/FacOffer.vue'
 import TokenCreation from '../components/TokenCreation.vue'
-import ApproveRejectFunds from '../components/ApproveRejectFunds.vue'
+import FacAccept from '../components/FacAccept.vue'
 
 const routes = [{
         path: '/',
@@ -29,12 +29,12 @@ const routes = [{
                 component: FacOffer
             },
             {
-                path: '/review-funds',
-                name: 'ApproveRejectFunds',
-                component: ApproveRejectFunds
+                path: '/fac-accept',
+                name: 'FacAccept',
+                component: FacAccept
             },
             {
-                path: '/tokencreate',
+                path: '/get-credits',
                 name: 'TokenCreation',
                 component: TokenCreation
             },

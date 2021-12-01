@@ -3,7 +3,7 @@
 		<div class="navigation-bar">
 			<Brand></Brand>
 			<div class="nav-links">
-				<router-link to="/tokencreate" class="tab">
+				<router-link to="/get-credits" class="tab">
 					<i class="fas fa-coins"></i>
 					Get Credits
 				</router-link>
@@ -15,7 +15,7 @@
 					<i class="fas fa-project-diagram"></i>
 					FAC Accept 
 				</router-link> -->
-				<router-link to="/review-funds" class="tab">
+				<router-link to="/fac-accept" class="tab">		<!---review funds-->
 					<i class="fas fa-check-double"></i>
 					FAC Accept
 				</router-link>

@@ -55,7 +55,7 @@
 
             <td class="data center">{{ offer.fac_premium }}</td>
             <td class="data center" v-if="offer.invest_accept == 1">
-              {{ offer.fund / 1000000 }}
+              <!-- {{ offer.fund / 1000000 }} -->100000
             </td>
 
             <td class="data center" v-else>0</td>
@@ -226,7 +226,7 @@ export default {
             });
           });
       } catch (err) {
-        this.$emit("popup", "", "There was error fetching project data.");
+        // this.$emit("popup", "", "There was error fetching project data.");
       }
 
       this.isLoading = false;
