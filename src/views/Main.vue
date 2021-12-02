@@ -48,6 +48,10 @@
 			<div class="name">
 				Welcome, {{ name }}
 			</div>
+			<div class="bankbalance">
+				<img src="../assets/algo.png" width="40" height="40" alt="algo-logo">
+				{{ bankbalance }}
+			</div>
 			<div class="balance">
 				<img src="../assets/algo.png" width="40" height="40" alt="algo-logo">
 				{{ balance }}
@@ -87,6 +91,7 @@ export default {
 			address: '',
 			balance: null,
 			account: this.$store.state.account,
+			bankbalance: this.$store.state.bankbalance,
 			name: this.$store.state.lastName + ' ' + this.$store.state.firstName 
 		}
 	},

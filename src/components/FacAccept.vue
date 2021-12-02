@@ -141,15 +141,15 @@ export default {
         //     // ? "The investment amount has been returned back to the invester."
         //      "The investment amount has been credited to your account.";
 
-        // let data = {
-        //   "Reinsurer_Address": this.$store.state.account,
+        let data = {
+          "Reinsurer_Address": this.$store.state.account,
 
-        //   "AppID": offer.AppID,
+          "AppID": offer.fac_offer_code,
 
-        //   "Accept": offer.Accept,
+          "Accept": 1,
 
-        //   "Token_ID": 48689901,
-        // };
+          "Token_ID": 48689901,
+        };
 
         let post = {
           mode: "cors",
@@ -158,7 +158,7 @@ export default {
 
           headers: { "Content-Type": "application/json; charset=UTF-8" },
 
-          body: JSON.stringify(offer),
+          body: JSON.stringify(data),
         };
 
         await fetch(this.$url + "/facaccept", post).then(() => {
