@@ -5,7 +5,11 @@
 			<div class="nav-links">
 				<router-link to="/get-credits" class="tab">
 					<i class="fas fa-coins"></i>
-					Get Credits
+					Buy Credits
+				</router-link>
+				<router-link to="/tokenredeem" class="tab">
+					<i class="fas fa-credit-card"></i>
+					Redeem Credits
 				</router-link>
 				<router-link to="/facoffercreation" class="tab">
 					<i class="fas fa-plus-circle"></i>
@@ -48,13 +52,13 @@
 			<div class="name">
 				Welcome, {{ name }}
 			</div>
-			<div class="bankbalance">
-				<img src="../assets/algo.png" width="40" height="40" alt="algo-logo">
-				{{ bankbalance }}
+			<div class="balance">
+				<i class="fas fa-rupee-sign"></i>
+				{{ balance }}
 			</div>
 			<div class="balance">
-				<img src="../assets/algo.png" width="40" height="40" alt="algo-logo">
-				{{ balance }}
+				<i class="fas fa-circle-notch"></i>
+				{{ Token_Balance }}
 			</div>
 			<div class="account">
 				<i class="fas fa-wallet"></i>
@@ -89,9 +93,9 @@ export default {
 			icon: '',
 			pClass: '',
 			address: '',
-			balance: null,
+			Token_Balance: null,
 			account: this.$store.state.account,
-			bankbalance: this.$store.state.bankbalance,
+			balance: null,
 			name: this.$store.state.lastName + ' ' + this.$store.state.firstName 
 		}
 	},
@@ -120,7 +124,8 @@ export default {
 			this.pClass = 'pop'
 			setTimeout(()=>{
 				this.getAccountBalance()
-			},1000)
+				this.getBankBalance()
+			},6000)
 		},
 		async getAccountBalance() {
 			try {
@@ -137,9 +142,31 @@ export default {
 					.then(response => response.json())
 					.then(data => {
 						if(data['Token Balance'] === null)
+						this.Token_Balance = 0
+						else
+						this.Token_Balance = data['Token Balance']
+					})
+			} catch(err) {
+				console.log(err)
+			}
+		},
+		async getBankBalance() {
+			try {
+				let post = {
+					mode: 'cors',
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+					body: JSON.stringify({
+						'account_address' : this.account,
+					})
+				}
+				await fetch(this.$url+'/accountbalance', post)
+					.then(response => response.json())
+					.then(data => {
+						if(data['balance'] === null)
 						this.balance = 0
 						else
-						this.balance = data['Token Balance']
+						this.balance = data['balance']
 					})
 			} catch(err) {
 				console.log(err)
@@ -148,6 +175,7 @@ export default {
 	},
 	mounted() {
 		this.getAccountBalance()
+		this.getBankBalance()
 	}
 }
 </script>

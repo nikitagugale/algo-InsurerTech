@@ -52,7 +52,6 @@ export default {
 			email: '',
 			password: '',
 			confirmPassword: '',
-			bankbalance: 100000
 			// accountAddress: ''
 		}
 	},
@@ -70,7 +69,6 @@ export default {
 					Last_Name: this.lastName,
 					Email: this.email,
 					Password: this.password,
-					bankbalance: this.bankbalance,
 				}
 				let post = {
 					mode: 'cors',

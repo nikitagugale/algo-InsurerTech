@@ -132,14 +132,14 @@ export default {
 
         let offer = this.selectedOffer;
 
-        // let popupTitle =
-        //   type == "approve" 
-        //    "Investment approved";
+        let popupTitle =
+          // type == "approve" 
+           "FAC Accepted";
 
-        // let popupDesc =
-        //   type == "approve"
-        //     // ? "The investment amount has been returned back to the invester."
-        //      "The investment amount has been credited to your account.";
+        let popupDesc =
+          // type == "approve"
+            // ? "The investment amount has been returned back to the invester."
+             "You have accepted the FAC Offer.";
 
         let data = {
           "Reinsurer_Address": this.$store.state.account,
@@ -162,7 +162,7 @@ export default {
         };
 
         await fetch(this.$url + "/facaccept", post).then(() => {
-          this.$emit("popup");
+          this.$emit("popup", popupTitle, popupDesc);
 
           this.loadData();
         });

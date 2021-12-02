@@ -6,6 +6,7 @@ import Signup from '../views/Signup.vue'
 import FundProject from '../components/FundProject.vue'
 import FacOffer from '../components/FacOffer.vue'
 import TokenCreation from '../components/TokenCreation.vue'
+import RedeemCredits from '../components/RedeemCredits.vue'
 import FacAccept from '../components/FacAccept.vue'
 
 const routes = [{
@@ -37,6 +38,11 @@ const routes = [{
                 path: '/get-credits',
                 name: 'TokenCreation',
                 component: TokenCreation
+            },
+            {
+                path: '/tokenredeem',
+                name: '/RedeemCredits',
+                component: RedeemCredits
             },
         ]
     },

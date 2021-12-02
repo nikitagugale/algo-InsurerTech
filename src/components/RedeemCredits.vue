@@ -1,7 +1,7 @@
 <template>
-	<section id="token-creation">
-		<h2>InsurerTech Token</h2>
-		<form @submit.prevent="tokenCreation">
+	<section id="credit-redeem">
+		<h2>Redeem Credits</h2>
+		<form @submit.prevent="tokenRedeem">
 			<!-- <div class="input-field with-label">
                 <label>InsurerTech Address</label>
 				<input ref="name" type="text" v-model="name" required />
@@ -23,8 +23,8 @@
 				<input type="text" v-model="name" required />
 			</div> -->
             <div class="input-field with-label">
-                <label>Number of Credits</label>
-				<input type="number" v-model="No_Of_Credits" required />
+                <label>Amount</label>
+				<input type="number" v-model="Amount" required />
 			</div>
 			<button type="submit" class="btn btn-primary" value="Submit">
 				<div v-if="!isLoading">Submit</div>
@@ -41,15 +41,15 @@
 
 <script>
 export default {
-	name: 'tokenCreation',
+	name: 'tokenRedeem',
 	data() {
 		return {
 			isLoading: false,
-			No_Of_Credits: null,
+			Amount: null,
 		}
 	},
 	methods: {
-		async tokenCreation() {
+		async tokenRedeem() {
 			try {
 				this.isLoading = true
 				let post = {
@@ -57,20 +57,20 @@ export default {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json; charset=UTF-8' },
 					body: JSON.stringify({
-						'Purchaser_Address' : this.$store.state.account,
-						'No_Of_Credits' : this.No_Of_Credits,
+						'Token_Revoke_Address' : this.$store.state.account,
+						'Amount' : this.Amount,
 						'Token_ID': 48689901,
 					})
 				}
-				await fetch(this.$url+'/tokentransfer', post)
+				await fetch(this.$url+'/tokenredeem', post)
 					.then(response => response.json())
 					.then(
-						this.$emit('popup', 'Credits Deposited Successfully!')
+						this.$emit('popup', 'Credits Redeemed Successfully!')
 						// this.url = ''
 						// this.funds = null
 					)
 			} catch(err) {
-				this.$emit('popup', '', 'An error occurred while transferring credits.')
+				this.$emit('popup', '', 'An error occurred while redeeming.')
 				console.log(err)
 			} 
 			this.isLoading = false
@@ -82,12 +82,6 @@ export default {
 		}
 	},
 	mounted() {
-		this.focusInput()
-		let today = new Date()
-		var dd = String(today.getDate()).padStart(2, '0');
-		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		var yyyy = today.getFullYear();
-		this.startDate = yyyy + '-' + mm + '-' + dd;
 	}
 }
 </script>
