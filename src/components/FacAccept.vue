@@ -25,6 +25,7 @@
             <td class="heading center">FAC Premium</td>
 
             <td class="heading center">Amount</td>
+
             <td class="heading center">Accept</td>
           </tr>
         </thead>
@@ -39,8 +40,6 @@
           <tr v-else v-for="(offer, index) in offers" :key="index">
 			<td class="data center">{{ offer.insurer_address }}</td>
 
-            <td class="data center">123445</td>
-
             <td class="data center">{{ offer.fac_offer_code }}</td>
 
             <td class="data center">{{ offer.policyNo }}</td>
@@ -49,23 +48,25 @@
 
             <td class="data center">{{ offer.riskType }}</td>
 
+            <td class="data center">{{ offer.total_SI }}</td>
+
             <td class="data center">{{ offer.total_premium }}</td>
 
             <td class="data center">{{ offer.fac_SI }}</td>
 
             <td class="data center">{{ offer.fac_premium }}</td>
-            <td class="data center" v-if="offer.invest_accept == 1">
-              <!-- {{ offer.fund / 1000000 }} -->100000
-            </td>
 
-            <td class="data center" v-else>0</td>
+            <td class="data center">{{offer.reinsurer_amount}}</td>
+
+            <!-- <td class="data center" v-if="offer.accept == 1">
+            </td>
+            <td class="data center" v-else>Accepted</td> -->
 
             <td class="data center">
               <label
-                v-if="offer.invest_accept == 1"
+                v-if="offer.accept == 0"
                 @click="
                   selectedOffer = offer;
-                  type = 'approve';
                 "
                 for="accept-offer"
               >
@@ -118,25 +119,9 @@ export default {
     return {
       isLoading: false,
 
-      offers: [
-        {
-			invest_accept: 1,
-          insurer_address:
-            "63U4ORLLXN4JBIMVAPK5LWYOQGIZDYVE3PBR6FE26GNTPEGOOIRFLIV45Q",
-          fac_offer_code: 0,
-          policyNo: 200,
-          productName: "Airplane",
-          riskType: "All",
-          total_SI: 1000,
-          total_premium: 10000,
-          fac_SI: 500,
-          fac_premium: 100,
-        },
-      ],
+      offers: [],
 
       selectedOffer: {},
-
-      type: "",
     };
   },
 
@@ -145,35 +130,26 @@ export default {
       try {
         this.isLoading = true;
 
-        let offer = this.selectedProject;
+        let offer = this.selectedOffer;
 
-        let type = this.type;
+        // let popupTitle =
+        //   type == "approve" 
+        //    "Investment approved";
 
-        let popupTitle =
-          type == "reject" ? "Investment rejected" : "Investment approved";
+        // let popupDesc =
+        //   type == "approve"
+        //     // ? "The investment amount has been returned back to the invester."
+        //      "The investment amount has been credited to your account.";
 
-        let popupDesc =
-          type == "reject"
-            ? "The investment amount has been returned back to the invester."
-            : "The investment amount has been credited to your account.";
+        // let data = {
+        //   "Reinsurer_Address": this.$store.state.account,
 
-        let data = {
-          "FAC Offer Code": offer.facoffercode,
+        //   "AppID": offer.AppID,
 
-          "Policy Name": this.policy_name,
+        //   "Accept": offer.Accept,
 
-          "Product Name": this.product_name,
-
-          "Risk Type": this.risk_type,
-
-          "Total SI": this.total_si,
-
-          "Total Premium": this.total_premium,
-
-          "FAC SI": this.fac_si,
-
-          "FAC Premium": this.face_premium,
-        };
+        //   "Token_ID": 48689901,
+        // };
 
         let post = {
           mode: "cors",
@@ -182,16 +158,17 @@ export default {
 
           headers: { "Content-Type": "application/json; charset=UTF-8" },
 
-          body: JSON.stringify(data),
+          body: JSON.stringify(offer),
         };
 
         await fetch(this.$url + "/facaccept", post).then(() => {
-          this.$emit("popup", popupTitle, popupDesc);
+          this.$emit("popup");
 
           this.loadData();
         });
       } catch (err) {
         this.$emit("popup", "", "There was an error.");
+        
       }
 
       this.isLoading = true;
@@ -209,7 +186,7 @@ export default {
           headers: { "Content-Type": "application/json; charset=UTF-8" },
 
           body: JSON.stringify({
-            creator_address: this.$store.state.account,
+            Reinsurer_Address: this.$store.state.account,
           }),
         };
 
@@ -217,11 +194,11 @@ export default {
           .then((response) => response.json())
 
           .then((data) => {
-            this.projects = [];
+            this.offers = [];
 
-            data.orderlist.map((p) => {
-              if (p.status == 0) {
-                this.projects.push(p);
+            data.offer.map((o) => {
+              if (o.accept == 0) {
+                this.offers.push(o);
               }
             });
           });

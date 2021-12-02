@@ -125,12 +125,15 @@ export default {
 					headers: { 'Content-Type': 'application/json; charset=UTF-8' },
 					body: JSON.stringify({
 						'account_address' : this.account,
-						Token_ID: 48497640
+						Token_ID: 48689901
 					})
 				}
 				await fetch(this.$url+'/tokenbalance', post)
 					.then(response => response.json())
 					.then(data => {
+						if(data['Token Balance'] === null)
+						this.balance = 0
+						else
 						this.balance = data['Token Balance']
 					})
 			} catch(err) {
