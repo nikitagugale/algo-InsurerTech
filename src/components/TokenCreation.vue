@@ -23,7 +23,7 @@
 				<input type="text" v-model="name" required />
 			</div> -->
             <div class="input-field with-label">
-                <label>Number of Tokens</label>
+                <label>Number of Tokens :</label>
 				<input type="number" v-model="No_Of_Credits" required />
 			</div>
 			<button type="submit" class="btn btn-primary" value="Submit">
