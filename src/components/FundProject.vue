@@ -1,6 +1,6 @@
 <template>
 	<section id="fund-projects">
-		<h2>Fund Project</h2>	
+		<h3>Fund Project</h3>	
 		<div class="Projects">
 			<table class="table table-striped">
 				<thead>

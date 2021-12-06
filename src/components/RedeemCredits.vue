@@ -1,6 +1,6 @@
 <template>
 	<section id="credit-redeem">
-		<h2>Redeem Credits</h2>
+		<h3>Redeem Tokens</h3>
 		<form @submit.prevent="tokenRedeem">
 			<!-- <div class="input-field with-label">
                 <label>InsurerTech Address</label>
@@ -23,7 +23,7 @@
 				<input type="text" v-model="name" required />
 			</div> -->
             <div class="input-field with-label">
-                <label>Amount</label>
+                <label>Number Of Tokens : </label>
 				<input type="number" v-model="Amount" required />
 			</div>
 			<button type="submit" class="btn btn-primary" value="Submit">
@@ -59,13 +59,13 @@ export default {
 					body: JSON.stringify({
 						'Token_Revoke_Address' : this.$store.state.account,
 						'Amount' : this.Amount,
-						'Token_ID': 48689901,
+						'Token_ID': 48764113,
 					})
 				}
 				await fetch(this.$url+'/tokenredeem', post)
 					.then(response => response.json())
 					.then(
-						this.$emit('popup', 'Credits Redeemed Successfully!')
+						this.$emit('popup', 'Tokens Redeemed Successfully!')
 						// this.url = ''
 						// this.funds = null
 					)

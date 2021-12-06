@@ -1,84 +1,61 @@
 <template>
 	<section id="fac-offer">
-		<h2>FAC Offer</h2>
+		<h3>FAC Offer</h3>
 		<form @submit.prevent="facOffer">
-				<div class = "split">				
+			<div class = "split">				
 				<div class="input-field with-label">
 					<label>Policy Number</label>
 					<input type="number" v-model="PolicyNo" required />
 				</div>
-				-
-				<div class="input-field with-label">
-					<label>Insurer Address</label>
-					<input type="text" v-model="Insurer_Address" required />
-				</div>
-				</div>
-				<div class = "split">
+				
 				<div class="input-field with-label">
 					<label>Product ID</label>
 					<input type="number" v-model="ProductID" required />
 				</div>
-				-
+				
 				<div class="input-field with-label">
 					<label>Product Name</label>
 					<input type="text" v-model="Product_Name" required />
 				</div>
-				</div>
-				<div class = "split">
-				<div class="input-field with-label">
-					<label>ReInsurer1 Address</label>
-					<input type="text" v-model="Reinsurer1_Address" required />
-				</div>
-				-
-				<div class="input-field with-label">
-					<label>ReInsurer2 Address</label>
-					<input type="text" v-model="Reinsurer2_Address" required />
-				</div>
-				</div>
-				<div class = "split">
-				<div class="input-field with-label">
-					<label>Risk Type</label>
-				<input type="text" v-model="Risk_Type" required />
-				</div>
-				-
-				<div class="input-field with-label">
-					<label>TokenID</label>
-					<input type="number" v-model="Token_ID" required />
-				</div>
-				</div>
-				<div class = "split">
-				<div class="input-field with-label">
-					<label>FAC SI</label>
-					<input type="number" v-model="FAC_SI" required />
-				</div>
-				-
-				<div class="input-field with-label">
-					<label>FAC Premium</label>
-					<input type="number" v-model="FAC_Premium" required />
-				</div>
-				</div>
-				<div class = "split">
-				<div class="input-field with-label">
-					<label>Total SI</label>
-					<input type="number" v-model="Total_SI" required />
-				</div>
-				-
+			</div>	
+			<div class = "split">
 				<div class="input-field with-label">
 					<label>Total Premium</label>
 					<input type="number" v-model="Total_Premium" required />
 				</div>
-				</div>
-				<div class = "split">
 				<div class="input-field with-label">
-					<label>ReInsurer1 Amount</label>
+					<label>Total SI</label>
+					<input type="number" v-model="Total_SI" required />
+				</div>
+				<div class="input-field with-label">
+					<label>FAC Premium</label>
+					<input type="number" v-model="FAC_Premium" required />
+				</div>
+				<div class="input-field with-label">
+					<label>FAC SI</label>
+					<input type="number" v-model="FAC_SI" required />
+				</div>
+			</div>
+			<div class = "split">
+				<div class="input-field with-label">
+					<label>ReInsurer1 Email</label>
+					<input type="text" v-model="Reinsurer1_Address" required />
+				</div>
+				<div class="input-field with-label">
+					<label>ReInsurer1 Percent(%)</label>
 					<input type="number" v-model="ReInsurer1_Amount" required />
 				</div>
-				-
+				
 				<div class="input-field with-label">
-					<label>ReInsurer2 Amount</label>
+					<label>ReInsurer2 Email</label>
+					<input type="text" v-model="Reinsurer2_Address" required />
+				</div>
+				<div class="input-field with-label">
+					<label>ReInsurer2 Percent(%)</label>
 					<input type="number" v-model="ReInsurer2_Amount" required />
 				</div>
-				</div>
+			</div>
+				
 			<button type="submit" class="btn btn-primary" value="Submit">
 				<div v-if="!isLoading">Submit</div>
 				<div v-else class="lds-ring">
@@ -97,7 +74,7 @@ export default {
 	data() {
 		return {
 			isLoading: false,
-			Insurer_Address: '',
+			Insurer_Address: this.$store.state.account,
 			Reinsurer1_Address: '',
 			Reinsurer2_Address: '',
 			PolicyNo: null,
@@ -110,7 +87,7 @@ export default {
 			FAC_Premium: null,
 			ReInsurer1_Amount: null,
 			ReInsurer2_Amount: null,
-			Token_ID: null,
+			Token_ID: 48764113,
 		}
 	},
 	methods: {
@@ -135,7 +112,7 @@ export default {
 						'FAC_Premium' : this.FAC_Premium,
 						'ReInsurer1_Amount' : this.ReInsurer1_Amount,
 						'ReInsurer2_Amount' : this.ReInsurer2_Amount,
-						'Token_ID' : this.Token_ID, 
+						'Token_ID' : 48764113, 
 					})
 				}
 				await fetch(this.$url+'/facoffercreation', post)
@@ -179,6 +156,6 @@ export default {
 <style scoped>
 .split {
 	align-items: center;
-	grid-template-columns: 18.8% 1% 18.8%;
+	/* grid-template-columns: 18.8% 1% 18.8%; */
 }
 </style>

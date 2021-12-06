@@ -12,7 +12,7 @@ import FacAccept from '../components/FacAccept.vue'
 const routes = [{
         path: '/',
         name: 'Main',
-        redirect: '/facoffercreation',
+        redirect: '/login',
         component: Main,
         meta: { requiresAuth: true, loading: true },
         children: [{

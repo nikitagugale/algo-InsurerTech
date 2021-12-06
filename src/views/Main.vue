@@ -5,11 +5,11 @@
 			<div class="nav-links">
 				<router-link to="/get-credits" class="tab">
 					<i class="fas fa-coins"></i>
-					Buy Credits
+					Buy Tokens
 				</router-link>
 				<router-link to="/tokenredeem" class="tab">
 					<i class="fas fa-credit-card"></i>
-					Redeem Credits
+					Redeem Tokens
 				</router-link>
 				<router-link to="/facoffercreation" class="tab">
 					<i class="fas fa-plus-circle"></i>
@@ -57,7 +57,7 @@
 				{{ balance }}
 			</div>
 			<div class="balance">
-				<i class="fas fa-circle-notch"></i>
+				<i class="fas fa-coins"></i>
 				{{ Token_Balance }}
 			</div>
 			<div class="account">
@@ -135,7 +135,7 @@ export default {
 					headers: { 'Content-Type': 'application/json; charset=UTF-8' },
 					body: JSON.stringify({
 						'account_address' : this.account,
-						Token_ID: 48689901
+						Token_ID: 48764113
 					})
 				}
 				await fetch(this.$url+'/tokenbalance', post)
@@ -196,7 +196,7 @@ export default {
 	color: white;
 	box-shadow: 0 3px 7px -7px black;
 	text-align: left;
-	font-size: 1.8rem;
+	font-size: 1.3rem;
 
 	.balance {
 		margin: 0 2rem;
